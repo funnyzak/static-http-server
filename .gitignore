@@ -2,4 +2,3 @@ node_modules
 *.log
 test*
 /lib
-/package-lock.json
