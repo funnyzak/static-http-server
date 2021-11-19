@@ -55,7 +55,7 @@
   },
   "np": {
     "yarn": false,
-    "contents": "./lib",
+    "contents": ".",
     "branch": "master",
     "releaseDraft": false
   },
