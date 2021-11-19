@@ -48,7 +48,7 @@ class StaticHttpServer {
       ...conf
     };
 
-    this.getUrl = this.getUrl.bind(this);
+    this.parseVirtualPath = this.parseVirtualPath.bind(this);
     this.getMime = this.getMime.bind(this);
     this.dispose = this.dispose.bind(this);
     this.serve = this.serve.bind(this);
@@ -58,7 +58,13 @@ class StaticHttpServer {
     this.log = this.log.bind(this);
   }
 
-  getUrl(filePath, withHost = false) {
+  /**
+   * Conversion of resource path to virtual path under Root
+   * @param {*} filePath
+   * @param {*} withHost with host:port prefix
+   * @returns
+   */
+  parseVirtualPath(filePath, withHost = false) {
     let virtualPath = !filePath || filePath === null
       ? ''
       : filePath.replace(this.config.root, '').replace(path.sep, '/');
@@ -80,11 +86,11 @@ class StaticHttpServer {
 
     this.server.listen(this.config.port, this.config.host, () => {
       const addr = `http://${this.config.host}:${this.config.port}`;
-      console.log(chalk`Serving at {blue ${addr}}.`);
+      console.log(info(`server http://{this.config.host}:${this.config.port} is started.`));
     });
 
     this.server.on('close', () => {
-      console.log('server is closed.');
+      console.log(info(`server http://{this.config.host}:${this.config.port} is closed.`));
     });
 
     registerShutdown(() => this.server.close());
@@ -94,16 +100,13 @@ class StaticHttpServer {
     if (!this.server) return;
     this.server.close((err) => {
       if (err) throw err;
-      console.log('server closed.');
+      console.log(info(`server http://{this.config.host}:${this.config.port} is closed.`));
     });
   }
 
   async handler(req, res) {
     const resPath = path.join(this.config.root, req.url.replace('/', path.sep));
-    this.log(`Request Info:
-URL: ${chalk.blue(req.url)}
-Header: ${chalk.green(JSON.stringify(req.headers))}
-`);
+    console.log(info(`request url: ${chalk.blue(req.url)}, request header: ${chalk.green(JSON.stringify(req.headers))}`));
 
     if (this.config.cors) {
       res.setHeader('Access-Control-Allow-Origin', '*');
@@ -131,11 +134,12 @@ Header: ${chalk.green(JSON.stringify(req.headers))}
       this.log('error', 'handler', err);
       res.statusCode = 404;
       res.setHeader('content-type', 'text/plain');
-      res.end(
-        process.env.NODE_ENV === 'development'
-          ? `request ${req.url} error, message: ${err.message}`
-          : `request ${req.url} fail.`
-      );
+      const errMessage = process.env.NODE_ENV === 'development'
+        ? `request ${req.url} error, message: ${err.message}`
+        : `request ${req.url} fail.`;
+
+      console.error(error(err.message));
+      res.end(errMessage);
     }
   }
 
