@@ -4,7 +4,6 @@
   "description": "a static http server",
   "main": "lib/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "watch \"npm run build\" src",
     "build": "babel src -d lib",
     "prepublish": "npm run build",
