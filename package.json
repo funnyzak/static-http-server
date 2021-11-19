@@ -4,6 +4,7 @@
   "description": "a static http server",
   "main": "lib/index.js",
   "scripts": {
+    "test": "echo \"o test specified\"",
     "dev": "watch \"npm run build\" src",
     "build": "babel src -d lib",
     "prepublish": "npm run build",
@@ -53,7 +54,7 @@
     ]
   },
   "np": {
-    "yarn": false,
+    "yarn": true,
     "contents": "lib",
     "branch": "master",
     "releaseDraft": true
