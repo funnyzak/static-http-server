@@ -5,8 +5,8 @@
 
 ## Getting Started
 
-1. With [npm](http://npmjs.org), run `npm install static-http-server`
-2. `const StaticHttpServer = require('static-http-server')`
+1. With [npm](http://npmjs.org), run `npm install @funnyzak/http-server`
+2. `const StaticHttpServer = require('@funnyzak/http-server')`
 
 ## Usage
 
@@ -16,7 +16,7 @@ Here is an example that:
 2. start server.
 
 ```js
-const StaticHttpServer = require('static-http-server')
+const StaticHttpServer = require('@funnyzak/http-server')
 const server = new StaticHttpServer({
   host: '127.0.0.1',
   port: 16808,
