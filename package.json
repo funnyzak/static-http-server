@@ -57,6 +57,6 @@
     "yarn": false,
     "contents": "lib",
     "branch": "master",
-    "releaseDraft": true
+    "releaseDraft": false
   }
 }
