@@ -1,6 +1,6 @@
 {
-  "name": "static-http-server",
-  "version": "1.0.0",
+  "name": "@funnyzak/http-server",
+  "version": "0.1.0",
   "description": "a static http server",
   "main": "lib/index.js",
   "scripts": {
@@ -36,7 +36,7 @@
     "@babel/plugin-transform-runtime": "7.16.4",
     "@babel/preset-env": "7.16.4",
     "core-js": "3.19.1",
-    "np": "7.5.0",
+    "np": "*",
     "watch": "1.0.2"
   },
   "babel": {
@@ -55,6 +55,8 @@
   },
   "np": {
     "yarn": false,
-    "contents": "lib"
+    "contents": "lib",
+    "branch": "master",
+    "releaseDraft": true
   }
 }

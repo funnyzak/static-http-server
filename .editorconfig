@@ -25,9 +25,6 @@ indent_size = 4
 [*.asm]
 indent_size = 8
 
-[*.md]
-trim_trailing_whitespace = true
-
 # Ideal settings - some plugins might support these.
 [*.js]
 quote_type = single
