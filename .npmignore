@@ -4,3 +4,4 @@ node_modules/
 src/
 .editorconfig
 tsconfig.json
+test.js

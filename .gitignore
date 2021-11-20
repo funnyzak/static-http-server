@@ -20,8 +20,11 @@ coverage
 /esm
 /index.d.ts
 locale.json
-/lib
+/lib/*.js
+/lib/*.ts
+!/lib/index.d.ts
 
 #dev
 demo.js
 test.js
+.eslintcache

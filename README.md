@@ -1,6 +1,7 @@
 [![js-standard-style](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://github.com/feross/standard)
 [![npm](https://img.shields.io/npm/v/@funnyzak/http-server.svg?style=flat-square)](https://www.npmjs.com/package/@funnyzak/http-server)
 [![license](https://img.shields.io/github/license/funnyzak/static-http-server.svg?style=flat-square)](https://github.com/funnyzak/static-http-server)
+
 # a simple static http server
 
 it is a simple static HTTP server node module.
@@ -18,7 +19,7 @@ Here is an example that:
 2. start server.
 
 ```js
-const StaticHttpServer = require('@funnyzak/http-server')
+const StaticHttpServer = require('@funnyzak/http-server');
 
 const rootPath = process.cwd();
 const server = new StaticHttpServer({
@@ -33,18 +34,17 @@ const server = new StaticHttpServer({
     cacheControl: true, // is set cacheControl
     lastModified: true,
     etag: true
-  },
-})
+  }
+});
 
 // start server
 server.serve();
 
 // close server
-setTimeout(server.close, 5000);
+setTimeout(server.dispose, 5000);
 
 // conversion of resource path to virtual path under Root
 var virtualUrl = server.parseVirtualPath(resourcePath);
-
 ```
 
 ## Author

@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "sourceMap": true,
+    "sourceMap": false,
     "strict": true,
     "noImplicitReturns": true,
     "noImplicitAny": true,
@@ -15,9 +15,9 @@
     "jsx": "react",
     "allowSyntheticDefaultImports": true,
     "outDir": "./lib",
-    "declaration": true
+    "declaration": false
   },
   "include": [
     "./src/**/*"
-  ]
+, "lib/index.d.ts"  ]
 }

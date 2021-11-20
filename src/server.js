@@ -1,3 +1,5 @@
+'use strict';
+
 const http = require('http');
 const path = require('path');
 const util = require('util');
@@ -8,7 +10,7 @@ const mime = require('mime');
 const stat = util.promisify(fs.stat);
 const readdir = util.promisify(fs.readdir);
 
-const warning = (message) => chalk`{yellow WARNING:} ${message}`;
+// const warning = (message) => chalk`{yellow WARNING:} ${message}`;
 const info = (message) => chalk`{magenta INFO:} ${message}`;
 const error = (message) => chalk`{red ERROR:} ${message}`;
 
@@ -65,15 +67,19 @@ class StaticHttpServer {
    * @returns
    */
   parseVirtualPath(filePath, withHost = false) {
-    let virtualPath = !filePath || filePath === null
-      ? ''
-      : filePath.replace(this.config.root, '').replace(path.sep, '/');
+    let virtualPath =
+      !filePath || filePath === null
+        ? ''
+        : filePath.replace(this.config.root, '').replace(path.sep, '/');
     this.log('get static url:', filePath, virtualPath);
-    if (virtualPath === '') return virtualPath;
+    if (virtualPath === '') {
+      return virtualPath;
+    }
 
     virtualPath = virtualPath.startsWith('/') ? virtualPath : `/${virtualPath}`;
-    return `${withHost ? `http://${this.config.host}:${this.config.port}` : ''
-      }${virtualPath}`;
+    return `${
+      withHost ? `http://${this.config.host}:${this.config.port}` : ''
+    }${virtualPath}`;
   }
 
   serve() {
@@ -85,28 +91,45 @@ class StaticHttpServer {
     );
 
     this.server.listen(this.config.port, this.config.host, () => {
-      const addr = `http://${this.config.host}:${this.config.port}`;
-      console.log(info(`server http://${this.config.host}:${this.config.port} is started.`));
+      console.log(
+        info(
+          `server http://${this.config.host}:${this.config.port} is started.`
+        )
+      );
     });
 
     this.server.on('close', () => {
-      console.log(info(`server http://${this.config.host}:${this.config.port} is closed.`));
+      console.log(
+        info(`server http://${this.config.host}:${this.config.port} is closed.`)
+      );
     });
 
     registerShutdown(() => this.server.close());
   }
 
   dispose() {
-    if (!this.server) return;
+    if (!this.server) {
+      return;
+    }
     this.server.close((err) => {
-      if (err) throw err;
-      console.log(info(`server http://${this.config.host}:${this.config.port} is closed.`));
+      if (err) {
+        throw err;
+      }
+      console.log(
+        info(`server http://${this.config.host}:${this.config.port} is closed.`)
+      );
     });
   }
 
   async handler(req, res) {
     const resPath = path.join(this.config.root, req.url.replace('/', path.sep));
-    console.log(info(`request url: ${chalk.blue(req.url)}, request header: ${chalk.green(JSON.stringify(req.headers))}`));
+    console.log(
+      info(
+        `request url: ${chalk.blue(req.url)}, request header: ${chalk.green(
+          JSON.stringify(req.headers)
+        )}`
+      )
+    );
 
     if (this.config.cors) {
       res.setHeader('Access-Control-Allow-Origin', '*');
@@ -134,9 +157,10 @@ class StaticHttpServer {
       this.log('error', 'handler', err);
       res.statusCode = 404;
       res.setHeader('content-type', 'text/plain');
-      const errMessage = process.env.NODE_ENV === 'development'
-        ? `request ${req.url} error, message: ${err.message}`
-        : `request ${req.url} fail.`;
+      const errMessage =
+        process.env.NODE_ENV === 'development'
+          ? `request ${req.url} error, message: ${err.message}`
+          : `request ${req.url} fail.`;
 
       console.error(error(err.message));
       res.end(errMessage);
@@ -177,9 +201,8 @@ class StaticHttpServer {
   }
 
   setCache(res, fileStats) {
-    const {
-      maxAge, expires, cacheControl, lastModified, etag
-    } = this.config.cache;
+    const { maxAge, expires, cacheControl, lastModified, etag } =
+      this.config.cache;
     if (expires) {
       res.setHeader(
         'Expires',
@@ -218,4 +241,4 @@ class StaticHttpServer {
   }
 }
 
-module.exports = StaticHttpServer
+module.exports = StaticHttpServer;
