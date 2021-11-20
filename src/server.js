@@ -193,7 +193,6 @@ class StaticHttpServer {
       res.setHeader('Last-Modified', fileStats.mtime.toUTCString());
     }
     if (etag) {
-      // mtime 需要转成字符串，否则在 windows 环境下会报错
       res.setHeader(
         'ETag',
         `${fileStats.size}-${fileStats.mtime.toUTCString()}`
