@@ -3,3 +3,4 @@ node_modules/
 ./*.lock
 src/
 .editorconfig
+tsconfig.json
