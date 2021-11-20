@@ -1,4 +1,27 @@
+# OSX
+.DS_Store
+
+# IDE
+.idea
+.vscode
+
+# npm
 node_modules
-*.log
-test*
+yarn.lock
+package-lock.json
+
+# jest
+coverage
+
+# build
+/locale
+/plugin
+/dayjs.min.js
+/esm
+/index.d.ts
+locale.json
 /lib
+
+#dev
+demo.js
+test.js
