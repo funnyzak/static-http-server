@@ -22,7 +22,7 @@ coverage
 locale.json
 /lib/*.js
 /lib/*.ts
-!/lib/index.d.ts
+!/lib/server.d.ts
 
 #dev
 demo.js
