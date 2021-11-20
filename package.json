@@ -17,7 +17,7 @@
   "scripts": {
     "test": "echo \"o test specified\"",
     "dev": "watch \"npm run build\" src",
-    "build": "babel src -d lib && tsc",
+    "build": "tsc",
     "prepublish": "npm run build",
     "release": "np"
   },

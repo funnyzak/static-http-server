@@ -86,11 +86,11 @@ class StaticHttpServer {
 
     this.server.listen(this.config.port, this.config.host, () => {
       const addr = `http://${this.config.host}:${this.config.port}`;
-      console.log(info(`server http://{this.config.host}:${this.config.port} is started.`));
+      console.log(info(`server http://${this.config.host}:${this.config.port} is started.`));
     });
 
     this.server.on('close', () => {
-      console.log(info(`server http://{this.config.host}:${this.config.port} is closed.`));
+      console.log(info(`server http://${this.config.host}:${this.config.port} is closed.`));
     });
 
     registerShutdown(() => this.server.close());
@@ -100,7 +100,7 @@ class StaticHttpServer {
     if (!this.server) return;
     this.server.close((err) => {
       if (err) throw err;
-      console.log(info(`server http://{this.config.host}:${this.config.port} is closed.`));
+      console.log(info(`server http://${this.config.host}:${this.config.port} is closed.`));
     });
   }
 
