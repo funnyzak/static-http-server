@@ -3,6 +3,9 @@
   "version": "0.1.5",
   "description": "a static http server",
   "main": "lib/index.js",
+  "files": [
+    "lib/**/*"
+  ],
   "scripts": {
     "test": "echo \"o test specified\"",
     "dev": "watch \"npm run build\" src",
